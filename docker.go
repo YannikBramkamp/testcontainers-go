@@ -603,10 +603,10 @@ func (p *DockerProvider) CreateContainer(ctx context.Context, req ContainerReque
 	mounts := []mount.Mount{}
 	for hostPath, innerPath := range req.BindMounts {
 		mounts = append(mounts, mount.Mount{
-			Type:        mount.TypeBind,
-			Source:      hostPath,
-			Target:      innerPath,
-			BindOptions: &mount.BindOptions{Propagation: "private"},
+			Type:     mount.TypeBind,
+			Source:   hostPath,
+			Target:   innerPath,
+			ReadOnly: true,
 		})
 	}
 	for volumeName, innerPath := range req.VolumeMounts {
